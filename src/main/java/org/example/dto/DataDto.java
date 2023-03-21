@@ -3,6 +3,8 @@ package org.example.dto;
 public class DataDto {
     private String ip;
 
+
+
     public String getIp() {
         return ip;
     }

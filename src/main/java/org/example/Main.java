@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.parser.JsonParser;
-import org.example.dto.DataDto;
 
 /**
  * Получить данные об адресе текущего пользователя из REST API в формате json
@@ -26,9 +25,6 @@ import org.example.dto.DataDto;
 public class Main {
     public static void main(String[] args) {
         JsonParser jsonParser = new JsonParser();
-        DataDto dto = jsonParser.getJsonFromSite();
-        dto = jsonParser.jsonToData(dto.getIp());
-        jsonParser.chooseStrategy();
-        jsonParser.print(dto);
+        jsonParser.chooseStrategy(args[0]);
     }
 }

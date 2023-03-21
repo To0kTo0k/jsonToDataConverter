@@ -3,7 +3,7 @@ package org.example;
 import java.io.IOException;
 import java.nio.file.*;
 
-public class FileExecutor {
+public class FileWriter {
 
     private static final String FILENAME = "src/main/resources/ip-info.txt";
 
