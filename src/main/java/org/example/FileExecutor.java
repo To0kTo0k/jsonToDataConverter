@@ -7,17 +7,13 @@ public class FileExecutor {
 
     private static final String FILENAME = "src/main/resources/ip-info.txt";
 
-    public FileExecutor() {
-    }
-
     /**
      * Put some info in file
      **/
     public void writeToFile(String data) {
-        Path path = Paths.get(FILENAME);
         createFile();
         try {
-            Files.writeString(path, data);
+            Files.writeString(Paths.get(FILENAME), data);
         } catch (IOException e) {
             System.out.println("Incorrect write to file");
         }
@@ -34,11 +30,6 @@ public class FileExecutor {
             }
         } catch (IOException e) {
             System.out.println("Incorrect file creation");
-        }
-        try {
-            Files.writeString(path, "");
-        } catch (IOException e) {
-            System.out.println("Incorrect file cleaning");
         }
     }
 }

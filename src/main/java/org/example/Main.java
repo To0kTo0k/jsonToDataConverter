@@ -1,7 +1,7 @@
 package org.example;
 
+import org.example.controller.JsonParser;
 import org.example.dto.DataDto;
-import org.example.model.Data;
 
 /**
  * Получить данные об адресе текущего пользователя из REST API в формате json
@@ -25,10 +25,10 @@ import org.example.model.Data;
  **/
 public class Main {
     public static void main(String[] args) {
-
-        final String URL = "https://api.ipify.org/?format=json";
-        DataDto dto = new DataDto(URL);
-        Data data = dto.convertJsonToData();
-        data.printData(false);
+        JsonParser jsonParser = new JsonParser();
+        DataDto dto = jsonParser.getJsonFromSite();
+        dto = jsonParser.jsonToData(dto.getIp());
+        jsonParser.chooseStrategy();
+        jsonParser.print(dto);
     }
 }
