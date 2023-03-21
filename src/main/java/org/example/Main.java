@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.controller.JsonParser;
+import org.example.parser.JsonParser;
 import org.example.dto.DataDto;
 
 /**

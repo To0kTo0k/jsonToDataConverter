@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.parser;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -48,9 +48,11 @@ public class JsonParser {
     public void chooseStrategy() {
         System.out.println("Введите true - для вывода в консоль, false - для вывода в файл");
         Scanner scanner = new Scanner(System.in);
-        if (scanner.nextBoolean()) {
+        String flag = scanner.next();
+        if (flag.equals("true")) {
             outputStrategy = new ConsoleOutputStrategy();
-        } else {
+        }
+        if (flag.equals("false")) {
             outputStrategy = new FileOutputStrategy();
         }
     }
