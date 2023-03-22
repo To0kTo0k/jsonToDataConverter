@@ -25,6 +25,6 @@ import org.example.parser.JsonParser;
 public class Main {
     public static void main(String[] args) {
         JsonParser jsonParser = new JsonParser();
-        jsonParser.chooseStrategy("console");
+        jsonParser.chooseStrategy(args[0]);
     }
 }
