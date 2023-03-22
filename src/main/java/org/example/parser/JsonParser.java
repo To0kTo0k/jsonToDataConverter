@@ -2,7 +2,6 @@ package org.example.parser;
 
 import com.google.gson.Gson;
 import org.example.dto.DataDto;
-import org.example.exception.IncorrectInputException;
 import org.example.strategy.ConsoleOutputStrategy;
 import org.example.strategy.FileOutputStrategy;
 import org.example.strategy.OutputStrategy;
@@ -16,21 +15,22 @@ public class JsonParser {
     private static final String FILE = "file";
 
     private OutputStrategy outputStrategy;
+    private  DataDto dto = new DataDto();
 
     /**
      * Choosing of output strategy
      **/
-    public void chooseStrategy(String flag) {
-        DataDto dto = getJsonFromSite();
-        dto = jsonToData(dto.getIp());
+    public void chooseStrategy(String outputWay) {
+        getJsonFromSite();
+        jsonToData();
         try {
-            switch (flag) {
+            switch (outputWay) {
                 case FILE -> outputStrategy = new FileOutputStrategy();
                 case CONSOLE -> outputStrategy = new ConsoleOutputStrategy();
-                default -> throw new IncorrectInputException("Incorrect input arg");
+                default -> throw new IllegalArgumentException("Incorrect input arg");
             }
         }
-        catch (IncorrectInputException e) {
+        catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
         printStrategy(dto);
@@ -44,26 +44,22 @@ public class JsonParser {
     /**
      * Getting json from site
      **/
-    public DataDto getJsonFromSite() {
-        DataDto dto = new DataDto();
+    public void getJsonFromSite() {
         try {
-            dto.setIp(Jsoup.connect(URL).ignoreContentType(true).execute().body());
+            this.dto.setIp(Jsoup.connect(URL).ignoreContentType(true).execute().body());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        return dto;
     }
 
     /**
      * Convert raw JSON to Data
      **/
-    public DataDto jsonToData(String json) {
-        DataDto dto = new DataDto();
+    public void jsonToData() {
         try {
-            dto = new Gson().fromJson(json, DataDto.class);
+            this.dto = new Gson().fromJson(this.dto.getIp(), DataDto.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return dto;
     }
 }

@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.exception.IncorrectInputException;
 import org.example.parser.JsonParser;
 
 /**
@@ -26,6 +25,6 @@ import org.example.parser.JsonParser;
 public class Main {
     public static void main(String[] args) {
         JsonParser jsonParser = new JsonParser();
-        jsonParser.chooseStrategy(args[0]);
+        jsonParser.chooseStrategy("console");
     }
 }
