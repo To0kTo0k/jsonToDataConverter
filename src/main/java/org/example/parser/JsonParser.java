@@ -11,34 +11,38 @@ import java.io.IOException;
 
 public class JsonParser {
     private static final String URL = "https://api.ipify.org/?format=json";
-    private static final String CONSOLE = "console";
-    private static final String FILE = "file";
 
-    private OutputStrategy outputStrategy;
-    private  DataDto dto = new DataDto();
+    private static DataDto dto = new DataDto();
 
-    /**
-     * Choosing of output strategy
-     **/
-    public void chooseStrategy(String outputWay) {
-        getJsonFromSite();
-        jsonToData();
-        try {
-            switch (outputWay) {
-                case FILE -> outputStrategy = new FileOutputStrategy();
-                case CONSOLE -> outputStrategy = new ConsoleOutputStrategy();
-                default -> throw new IllegalArgumentException("Incorrect input arg");
+    public enum OutputOperation {
+        FILE {
+            @Override
+            public void printStrategy() {
+                OutputStrategy outputStrategy = new FileOutputStrategy();
+                outputStrategy.print(dto);
             }
+        },
+        CONSOLE {
+            @Override
+            public void printStrategy() {
+                OutputStrategy outputStrategy = new ConsoleOutputStrategy();
+                outputStrategy.print(dto);
+            }
+        };
+
+        public abstract void printStrategy();
+
+        OutputOperation() {
         }
-        catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-        printStrategy(dto);
     }
 
-    /**Info output**/
-    public void printStrategy(DataDto dto) {
-        outputStrategy.print(dto);
+    /**
+     * Choosing output strategy
+     **/
+    public void chooseStrategy(String outputValue) {
+        getJsonFromSite();
+        jsonToData();
+        OutputOperation.valueOf(outputValue.toUpperCase()).printStrategy();
     }
 
     /**
@@ -46,7 +50,7 @@ public class JsonParser {
      **/
     public void getJsonFromSite() {
         try {
-            this.dto.setIp(Jsoup.connect(URL).ignoreContentType(true).execute().body());
+            dto.setIp(Jsoup.connect(URL).ignoreContentType(true).execute().body());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -57,7 +61,7 @@ public class JsonParser {
      **/
     public void jsonToData() {
         try {
-            this.dto = new Gson().fromJson(this.dto.getIp(), DataDto.class);
+            dto = new Gson().fromJson(dto.getIp(), DataDto.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
