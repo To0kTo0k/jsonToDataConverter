@@ -29,7 +29,7 @@ public class FileWriter {
                 Files.createFile(path);
             }
         } catch (IOException e) {
-            System.out.println("Incorrect file creation");
+            System.out.println(e.getMessage());
         }
     }
 }

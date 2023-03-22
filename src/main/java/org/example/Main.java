@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.exception.IncorrectInputException;
 import org.example.parser.JsonParser;
 
 /**

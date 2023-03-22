@@ -2,6 +2,7 @@ package org.example.parser;
 
 import com.google.gson.Gson;
 import org.example.dto.DataDto;
+import org.example.exception.IncorrectInputException;
 import org.example.strategy.ConsoleOutputStrategy;
 import org.example.strategy.FileOutputStrategy;
 import org.example.strategy.OutputStrategy;
@@ -10,7 +11,9 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 
 public class JsonParser {
-    public static final String URL = "https://api.ipify.org/?format=json";
+    private static final String URL = "https://api.ipify.org/?format=json";
+    private static final String CONSOLE = "console";
+    private static final String FILE = "file";
 
     private OutputStrategy outputStrategy;
 
@@ -20,12 +23,21 @@ public class JsonParser {
     public void chooseStrategy(String flag) {
         DataDto dto = getJsonFromSite();
         dto = jsonToData(dto.getIp());
-        if (flag.equals("console")) {
-            outputStrategy = new ConsoleOutputStrategy();
+        try {
+            switch (flag) {
+                case FILE -> outputStrategy = new FileOutputStrategy();
+                case CONSOLE -> outputStrategy = new ConsoleOutputStrategy();
+                default -> throw new IncorrectInputException("Incorrect input arg");
+            }
         }
-        if (flag.equals("file")) {
-            outputStrategy = new FileOutputStrategy();
+        catch (IncorrectInputException e) {
+            System.out.println(e.getMessage());
         }
+        printStrategy(dto);
+    }
+
+    /**Info output**/
+    public void printStrategy(DataDto dto) {
         outputStrategy.print(dto);
     }
 
