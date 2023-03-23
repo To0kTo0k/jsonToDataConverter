@@ -1,7 +1,8 @@
-package org.example.strategy;
+package org.example.strategy.impl;
 
 import org.example.FileWriter;
 import org.example.dto.DataDto;
+import org.example.strategy.OutputStrategy;
 
 public class FileOutputStrategy implements OutputStrategy {
     @Override

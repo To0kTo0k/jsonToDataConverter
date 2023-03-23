@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.parser.JsonParser;
-
 /**
  * Получить данные об адресе текущего пользователя из REST API в формате json
  * Затем сохранить полученный JSON в отдельный файл с названием ip-info.txt
@@ -24,7 +22,7 @@ import org.example.parser.JsonParser;
  **/
 public class Main {
     public static void main(String[] args) {
-        JsonParser jsonParser = new JsonParser();
-        jsonParser.chooseStrategy(args[0]);
+        OutputChoose outputChoose = new OutputChoose();
+        outputChoose.chooseStrategy(args[0]);
     }
 }

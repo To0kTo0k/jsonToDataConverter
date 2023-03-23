@@ -1,23 +1,26 @@
 package org.example;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.nio.file.*;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class FileWriter {
 
-    private static final Path FILEPATH = Paths.get("src/main/resources/ip-info.txt");
+    private static final String FILEPATH = "src/main/resources/ip-info.txt";
 
     /**
      * Put some info in file
      **/
     public void writeToFile(String data) {
-        try {
-            if (Files.notExists(FILEPATH)) {
-                Files.createFile(FILEPATH);
+        byte[] bytes = data.getBytes();
+        try (OutputStream outputStream = new BufferedOutputStream(Files.newOutputStream(Paths.get(FILEPATH)))) {
+            for (byte everyByte:bytes) {
+                outputStream.write(everyByte);
             }
-            Files.writeString(FILEPATH, data);
         } catch (IOException e) {
-            System.out.println("Incorrect write to file");
+            System.out.println(e.getMessage());
         }
     }
 }
