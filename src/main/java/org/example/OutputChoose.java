@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.enumeration.OutputOperation;
+import org.example.datastructucture.HashmapOutputOperation;
 import org.example.parser.JsonParser;
 
 public class OutputChoose {
@@ -10,6 +10,7 @@ public class OutputChoose {
     public void chooseStrategy(String dataStorage) {
         JsonParser jsonParser = new JsonParser();
         jsonParser.getDataFromSite();
-        OutputOperation.valueOf(dataStorage.toUpperCase()).getOperation().print(jsonParser.getDto());
+        HashmapOutputOperation hashmapOutputOperation = new HashmapOutputOperation();
+        hashmapOutputOperation.getStrategyHashMap().get(dataStorage.toUpperCase()).print(jsonParser.getDto());
     }
 }
