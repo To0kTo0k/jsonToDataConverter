@@ -10,6 +10,6 @@ public class OutputChoose {
     public void chooseStrategy(String dataStorage) {
         JsonParser jsonParser = new JsonParser();
         jsonParser.getDataFromSite();
-        OutputOperation.valueOf(dataStorage.toUpperCase()).printStrategy(jsonParser.getDto());
+        OutputOperation.valueOf(dataStorage.toUpperCase()).getOperation().print(jsonParser.getDto());
     }
 }

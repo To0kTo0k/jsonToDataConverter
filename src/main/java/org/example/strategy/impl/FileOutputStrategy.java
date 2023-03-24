@@ -1,6 +1,6 @@
 package org.example.strategy.impl;
 
-import org.example.FileWriter;
+import org.example.filewriter.FileWriter;
 import org.example.dto.DataDto;
 import org.example.strategy.OutputStrategy;
 
