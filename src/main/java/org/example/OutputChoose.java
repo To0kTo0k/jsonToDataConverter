@@ -3,11 +3,9 @@ package org.example;
 import org.example.datastructucture.HashmapOutputOperation;
 import org.example.parser.JsonParser;
 
-import java.io.IOException;
-
 public class OutputChoose {
     /**
-     * Choosing output strategy
+     * Program execution and choosing how to output result
      **/
     public void chooseStrategy(String dataStorage) {
         JsonParser jsonParser = new JsonParser();
