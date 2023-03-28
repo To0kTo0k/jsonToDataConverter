@@ -12,7 +12,6 @@ public enum OutputOperation {
 
     private final OutputStrategy strategy;
 
-
     OutputOperation(OutputStrategy outputStrategy) {
         this.strategy = outputStrategy;
     }

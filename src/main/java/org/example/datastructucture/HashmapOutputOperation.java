@@ -10,12 +10,13 @@ import java.util.HashMap;
 @Getter
 public class HashmapOutputOperation {
     HashMap<String, OutputStrategy> strategyHashMap = new HashMap<>();
+
+    public HashmapOutputOperation() {
+        putStrategyToHashMap();
+    }
+
     private void putStrategyToHashMap() {
         strategyHashMap.put("FILE", new FileOutputStrategy());
         strategyHashMap.put("CONSOLE", new ConsoleOutputStrategy());
-    }
-
-    public HashmapOutputOperation(){
-        putStrategyToHashMap();
     }
 }

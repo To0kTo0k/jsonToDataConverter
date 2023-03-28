@@ -1,4 +1,4 @@
-package org.example.file;
+package org.example.writer;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class FileWriter {
     public void writeToFile(String data) {
         byte[] bytes = data.getBytes();
         try (OutputStream outputStream = new BufferedOutputStream(Files.newOutputStream(Paths.get(FILEPATH)))) {
-            for (byte everyByte:bytes) {
+            for (byte everyByte : bytes) {
                 outputStream.write(everyByte);
             }
         } catch (IOException e) {

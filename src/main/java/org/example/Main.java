@@ -17,12 +17,12 @@ package org.example;
  * Применить паттерн Стратегия и предоставить пользователю выбор вывода ip адреса через файл или через консоль
  * Выбор пользователя осуществляется при помощи аргументов в командной строке
  * <p>
- *
+ * <p>
  * Ссылка на API: <a href="https://api.ipify.org/?format=json">...</a>
  **/
 public class Main {
     public static void main(String[] args) {
         OutputChoose outputChoose = new OutputChoose();
-        outputChoose.chooseStrategy(args[2]);
+        outputChoose.chooseStrategy(args[0]);
     }
 }
